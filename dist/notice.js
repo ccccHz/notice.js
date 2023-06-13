@@ -187,7 +187,7 @@ var CloseItem = exports.CloseItem = function CloseItem(item) {
     var position = '.' + item.closest('.noticejs').className.replace('noticejs', '').trim();
     setTimeout(function () {
         if (document.querySelectorAll(position + ' .item').length <= 0) {
-            document.querySelector(position).remove();
+            document.querySelector(position) && document.querySelector(position).remove();
         }
     }, 500);
 };
@@ -314,7 +314,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var NoticeJs = function () {
   /**
-   * @param {object} options 
+   * @param {object} options
    * @returns {Noty}
    */
   function NoticeJs() {
@@ -325,13 +325,13 @@ var NoticeJs = function () {
     this.options = Object.assign(API.Defaults, options);
     this.component = new _components.Components();
 
-    this.on('beforeShow', this.options.callbacks.beforeShow);
-    this.on('onShow', this.options.callbacks.onShow);
-    this.on('afterShow', this.options.callbacks.afterShow);
-    this.on('onClose', this.options.callbacks.onClose);
-    this.on('afterClose', this.options.callbacks.afterClose);
-    this.on('onClick', this.options.callbacks.onClick);
-    this.on('onHover', this.options.callbacks.onHover);
+    this.on("beforeShow", this.options.callbacks.beforeShow);
+    this.on("onShow", this.options.callbacks.onShow);
+    this.on("afterShow", this.options.callbacks.afterShow);
+    this.on("onClose", this.options.callbacks.onClose);
+    this.on("afterClose", this.options.callbacks.afterClose);
+    this.on("onClick", this.options.callbacks.onClick);
+    this.on("onHover", this.options.callbacks.onHover);
 
     return this;
   }
@@ -342,10 +342,10 @@ var NoticeJs = function () {
 
 
   _createClass(NoticeJs, [{
-    key: 'show',
+    key: "show",
     value: function show() {
       var container = this.component.createContainer();
-      if (document.querySelector('.noticejs-' + this.options.position) === null) {
+      if (document.querySelector(".noticejs-" + this.options.position) === null) {
         document.body.appendChild(container);
       }
 
@@ -377,11 +377,11 @@ var NoticeJs = function () {
      */
 
   }, {
-    key: 'on',
+    key: "on",
     value: function on(eventName) {
       var cb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
-      if (typeof cb === 'function' && this.options.callbacks.hasOwnProperty(eventName)) {
+      if (typeof cb === "function" && this.options.callbacks.hasOwnProperty(eventName)) {
         this.options.callbacks[eventName].push(cb);
       }
 
@@ -389,12 +389,12 @@ var NoticeJs = function () {
     }
 
     /**
-     * @param {Object} options 
+     * @param {Object} options
      * @return {Notice}
      */
 
   }], [{
-    key: 'overrideDefaults',
+    key: "overrideDefaults",
     value: function overrideDefaults(options) {
       this.options = Object.assign(API.Defaults, options);
       return this;
@@ -405,7 +405,7 @@ var NoticeJs = function () {
 }();
 
 exports.default = NoticeJs;
-module.exports = exports['default'];
+module.exports = exports["default"];
 
 /***/ }),
 /* 3 */
@@ -447,30 +447,30 @@ var Components = exports.Components = function () {
   }
 
   _createClass(Components, [{
-    key: 'createContainer',
+    key: "createContainer",
     value: function createContainer() {
-      var element_class = 'noticejs-' + options.position;
-      var element = document.createElement('div');
-      element.classList.add('noticejs');
+      var element_class = "noticejs-" + options.position;
+      var element = document.createElement("div");
+      element.classList.add("noticejs");
       element.classList.add(element_class);
 
       return element;
     }
   }, {
-    key: 'createHeader',
+    key: "createHeader",
     value: function createHeader() {
       var element = void 0;
-      if (options.title && options.title !== '') {
-        element = document.createElement('div');
-        element.setAttribute('class', 'noticejs-heading');
+      if (options.title && options.title !== "") {
+        element = document.createElement("div");
+        element.setAttribute("class", "noticejs-heading");
         element.textContent = options.title;
       }
 
       // Add close button
-      if (options.closeWith.includes('button')) {
-        var close = document.createElement('div');
-        close.setAttribute('class', 'close');
-        close.innerHTML = '&times;';
+      if (options.closeWith.includes("button")) {
+        var close = document.createElement("div");
+        close.setAttribute("class", "close");
+        close.innerHTML = "&times;";
         if (element) {
           element.appendChild(close);
         } else {
@@ -481,48 +481,47 @@ var Components = exports.Components = function () {
       return element;
     }
   }, {
-    key: 'createBody',
+    key: "createBody",
     value: function createBody() {
-      var element = document.createElement('div');
-      element.setAttribute('class', 'noticejs-body');
-      var content = document.createElement('div');
-      content.setAttribute('class', 'noticejs-content');
+      var element = document.createElement("div");
+      element.setAttribute("class", "noticejs-body");
+      var content = document.createElement("div");
+      content.setAttribute("class", "noticejs-content");
       content.innerHTML = options.text;
       element.appendChild(content);
 
-      if (options.scroll !== null && options.scroll.maxHeight !== '') {
-        element.style.overflowY = 'auto';
-        element.style.maxHeight = options.scroll.maxHeight + 'px';
+      if (options.scroll !== null && options.scroll.maxHeight !== "") {
+        element.style.overflowY = "auto";
+        element.style.maxHeight = options.scroll.maxHeight + "px";
 
         if (options.scroll.showOnHover === true) {
-          element.style.visibility = 'hidden';
+          element.style.visibility = "hidden";
         }
       }
       return element;
     }
   }, {
-    key: 'createProgressBar',
+    key: "createProgressBar",
     value: function createProgressBar() {
-      var element = document.createElement('div');
-      element.setAttribute('class', 'noticejs-progressbar');
-      var bar = document.createElement('div');
-      bar.setAttribute('class', 'noticejs-bar');
+      var element = document.createElement("div");
+      element.setAttribute("class", "noticejs-progressbar");
+      var bar = document.createElement("div");
+      bar.setAttribute("class", "noticejs-bar");
       element.appendChild(bar);
 
       // Progress bar animation
-      if (options.progressBar === true && typeof options.timeout !== 'boolean' && options.timeout !== false) {
+      if (options.progressBar === true && typeof options.timeout !== "boolean" && options.timeout !== false) {
         var frame = function frame() {
           if (width <= 0) {
             clearInterval(id);
 
-            var item = element.closest('div.item');
+            var item = element.closest("div.item");
             // Add close animation
             if (options.animation !== null && options.animation.close !== null) {
-
               // Remove open animation class
-              item.className = item.className.replace(new RegExp('(?:^|\\s)' + options.animation.open + '(?:\\s|$)'), ' ');
+              item.className = item.className.replace(new RegExp("(?:^|\\s)" + options.animation.open + "(?:\\s|$)"), " ");
               // Add close animation class
-              item.className += ' ' + options.animation.close;
+              item.className += " " + options.animation.close;
 
               // Close notification after 0.5s + timeout
               var close_time = parseInt(options.timeout) + 500;
@@ -535,12 +534,35 @@ var Components = exports.Components = function () {
             }
           } else {
             width--;
-            bar.style.width = width + '%';
+            bar.style.width = width + "%";
           }
+        };
+        // handle hover keep showing
+
+
+        var startProgress = function startProgress() {
+          id = setInterval(frame, options.timeout);
+          console.log("startProgress");
+        };
+
+        var stopProgress = function stopProgress() {
+          clearInterval(id);
+          console.log("stopProgress");
         };
 
         var width = 100;
-        var id = setInterval(frame, options.timeout);
+        var id = void 0;
+
+        startProgress();
+        var mainContiner = document.querySelector(".noticejs");
+        mainContiner.addEventListener("mouseenter", function (event) {
+          // console.log(event.fromElement);
+          stopProgress();
+        });
+        mainContiner.addEventListener("mouseleave", function (event) {
+          // console.log(event.fromElement);
+          startProgress();
+        });
       }
 
       return element;

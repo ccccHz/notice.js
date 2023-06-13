@@ -1,0 +1,2 @@
+- nvm use 10
+- how to use https://www.cnblogs.com/Wayou/p/restrict_node_version.html
